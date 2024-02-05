@@ -5,6 +5,9 @@ output "resource_group_name" {
 output "kubernetes_cluster_name" {
   value = azurerm_kubernetes_cluster.aks.name
 }
+output "jump_box_public_ip" {
+  value =  data.terraform_remote_state.core.outputs.jump_box_public_ip
+}
 
 output "host" {
   value = azurerm_kubernetes_cluster.aks.kube_config.0.host

@@ -6,4 +6,8 @@ output "public_ip_address" {
   description = "Specifies the private IP address of the firewall."
   value = azurerm_public_ip.fw_ip.ip_address
 }
+output "fw_name" {
+  description = "Specifies the private IP address of the firewall."
+  value = azurerm_firewall.firewall.name
+}
 

@@ -24,4 +24,9 @@ variable "node_subnet_range" {
   type        = list(any)
   default     = ["10.1.0.0/24"]
 }
+variable "appgw_private_ip" {
+  description = "location"
+  type        = string
+  default     = "10.0.1.12"
+}
 

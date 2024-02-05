@@ -34,7 +34,7 @@ resource "azurerm_application_gateway" "appgw" {
 
   frontend_ip_configuration {
     name                          = "private_frontend_ip_appgw_aks"
-    private_ip_address            = "10.0.1.10"
+    private_ip_address            = var.appgw_private_ip
     private_ip_address_allocation = "Static"
     subnet_id                     = data.terraform_remote_state.netcore.outputs.vnet_hub_appgw_subnet_id
   }
@@ -81,5 +81,36 @@ resource "azurerm_application_gateway" "appgw" {
       ssl_certificate
     ]
   }
-  # depends_on = [ azurerm_network_security_rule.appgw_allow_inbound_rule ]
+  depends_on = [ azurerm_network_security_rule.gateway_allow_gateway_manager_https_inbound ]
 }
+
+# resource "azurerm_firewall_nat_rule_collection" "fw_dnat_to_appgw_private_ip" {
+#   name                = "fw_dnat_to_appgw_private_ip"
+#   azure_firewall_name = data.terraform_remote_state.firewall.outputs.fw_name
+#   resource_group_name = data.terraform_remote_state.netcore.outputs.netcore_rg
+#   priority            = 100
+#   action              = "Dnat"
+
+#   rule {
+#     name = "agic_http"
+
+#     source_addresses = [
+#       "*",
+#     ]
+
+#     destination_ports = [
+#       "80",
+#     ]
+
+#     destination_addresses = [data.terraform_remote_state.firewall.outputs.public_ip_address]
+
+
+#     translated_port = 80
+
+#     translated_address = var.appgw_private_ip
+
+#     protocols = [
+#       "TCP",
+#     ]
+#   }
+# }

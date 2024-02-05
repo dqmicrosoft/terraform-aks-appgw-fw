@@ -35,7 +35,7 @@ resource "azurerm_virtual_network_peering" "hub2spoke" {
   resource_group_name       = azurerm_resource_group.netcore_rg.name
   virtual_network_name      = azurerm_virtual_network.vnet_hub.name
   remote_virtual_network_id = azurerm_virtual_network.vnet_aks.id
-  depends_on          = [azurerm_virtual_network.vnet_aks , azurerm_virtual_network.vnet_hub]
+  depends_on          = [ azurerm_virtual_network.vnet_aks , azurerm_virtual_network.vnet_hub ]
 }
 
 resource "azurerm_virtual_network_peering" "spoke2hub" {
@@ -43,6 +43,7 @@ resource "azurerm_virtual_network_peering" "spoke2hub" {
   resource_group_name       = azurerm_resource_group.aks_rg.name
   virtual_network_name      = azurerm_virtual_network.vnet_aks.name
   remote_virtual_network_id = azurerm_virtual_network.vnet_hub.id
+  depends_on          = [ azurerm_virtual_network.vnet_aks , azurerm_virtual_network.vnet_hub ]
 }
 
 resource "azurerm_subnet" "hub_subnet" {

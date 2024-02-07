@@ -15,15 +15,17 @@ This project deploys an environment with AKS with AGIC on a vnet, and App Gatewa
    Open your terminal and run the following commands to create four containers in your Azure account:
 
    ```bash
-   az storage container create --name container1
-   az storage container create --name container2
-   az storage container create --name container3
-   az storage container create --name container4
+   az storage container create --name netcoretfstate
+   az storage container create --name coretfstate
+   az storage container create --name fwtfstate
+   az storage container create --name akstfstate
    ```
 These containers are for storing the state of the terraform of each folder. So you must create one for each.
 They will need to pull outputs from each other.
 
 ## Terraform Deployment Order
+
+Add your storage key in the provider.tf and the data.tf. You can use other methods more secure to pass your key of course.
 
 To deploy the infrastructure, follow the below order:
 

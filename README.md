@@ -56,6 +56,3 @@ Make sure to wait for each deployment to complete before moving on to the next f
 
 To clean up the deployed resources, run `terraform destroy` in each folder in reverse order.
 
-## License
-
-This project is licensed under the [MIT License](LICENSE).
